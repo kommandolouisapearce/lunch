@@ -52,10 +52,9 @@ module.exports = function (token, url) {
 					   }
 					    else {
 						input = textlist[0];
-						//console.log(input);
 					    }
 					    var user1 = {name: input};
-		                            collection.insert([user1], function (err, result) {
+					    collection.update({name: input},user1, {upsert: true}, function (err, result) {
 		                              if (err) {
 		                                console.log(err);
 		                              } else {
@@ -69,7 +68,6 @@ module.exports = function (token, url) {
 		                                } else {
 		                                        return res.status(200).end();
 		                                }
-
 		                              }
 		                              db.close();
 		                            });

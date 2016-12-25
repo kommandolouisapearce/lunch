@@ -12,8 +12,8 @@ var app = express();
     next();
 });*/
 
-var token = fs.readFileSync("token", "utf-8")
-var url =  fs.readFileSync("url", "utf-8")
+var token = fs.readFileSync("token", "utf-8").replace(/\n$/, '');
+var url =  fs.readFileSync("url", "utf-8").replace(/\n$/, '');
 
 
 var port = process.env.PORT || 3000;
