@@ -107,6 +107,33 @@ module.exports = function (token, url) {
 		                            });
 		                        });
 		                        break;
+
+case "random":
+        MongoClient.connect(url, function (err, db) {
+                var collection = db.collection('lunchlist');
+                collection.find({}).toArray(function (err, result) {
+                if (err) {
+                        console.log(err);
+                } else if (result.length) {
+                        console.log(result);
+		message = result[Math.floor(Math.random() * (result.length - 0) + 0)].name;
+                //message = JSON.stringify(items);
+                var botPayload = {
+                        "response_type": "in_channel",
+                        text : message
+                };
+                if (userName !== 'slackbot') { // avoid infinite loop
+                        return res.status(200).json(botPayload);
+                } else {
+                        return res.status(200).end();
+                }
+                } else {
+                        console.log('No document(s) found with defined "find" criteria!');
+                }
+                db.close();
+                });
+        });
+		                        break;					
 		                default:
 		                        message = "error";
 		        }
