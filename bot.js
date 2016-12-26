@@ -37,7 +37,7 @@ module.exports = function (token, url) {
 				                        }
 				                        db.close();
 		                                });
-		                        });'
+		                        });
 		                        break;
 		                case "add":
 		                        MongoClient.connect(url, function (err, db) {
